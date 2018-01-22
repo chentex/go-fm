@@ -1,0 +1,14 @@
+language: go
+go:
+- 1.9
+before_install:
+- sudo wget https://github.com/golang/dep/releases/download/v0.3.2/dep-linux-amd64 -O dep
+- sudo chmod +x dep
+- sudo cp dep /usr/bin
+install:
+- make install_dependencies
+script:
+- make test
+after_success:
+- make cover
+- bash <(curl -s https://codecov.io/bash)
