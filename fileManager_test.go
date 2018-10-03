@@ -62,7 +62,7 @@ func TestFileManager_WriteFile(t *testing.T) {
 	type args struct {
 		file        string
 		data        []byte
-		permissions int
+		permissions uint32
 	}
 	tests := []struct {
 		name    string
@@ -112,22 +112,17 @@ func TestFileManager_ExistsFile(t *testing.T) {
 		file string
 	}
 	tests := []struct {
-		name    string
-		fm      *FileManager
-		args    args
-		want    bool
-		wantErr bool
+		name string
+		fm   *FileManager
+		args args
+		want bool
 	}{
-		{"1", &FileManager{}, args{"fixtures/readfile.txt"}, true, false},
-		{"2", &FileManager{}, args{"fixtures/nofile.txt"}, false, true},
+		{"1", &FileManager{}, args{"fixtures/readfile.txt"}, true},
+		{"2", &FileManager{}, args{"fixtures/nofile.txt"}, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.fm.ExistsFile(tt.args.file)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("FileManager.ExistsFile() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
+			got := tt.fm.ExistsFile(tt.args.file)
 			if got != tt.want {
 				t.Errorf("FileManager.ExistsFile() = %v, want %v", got, tt.want)
 			}
