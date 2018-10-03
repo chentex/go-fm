@@ -29,13 +29,12 @@ func (fm *FileManager) OpenFile(file string) (string, error) {
 
 // WriteFile saves the data in the file, with the given permission
 // if 0 is sent as permission 0644 will be used to write the file
-func (fm *FileManager) WriteFile(file string, data []byte, permissions int) error {
-	perm := int(permissions)
-	if perm == 0 {
-		perm = int(0644)
+func (fm *FileManager) WriteFile(file string, data []byte, permissions uint32) error {
+	if permissions == 0 {
+		permissions = 0644
 	}
 
-	err := ioutil.WriteFile(file, data, os.FileMode(perm))
+	err := ioutil.WriteFile(file, data, os.FileMode(permissions))
 	if err != nil {
 		return errors.Wrap(err, "while writing file")
 	}
@@ -43,10 +42,10 @@ func (fm *FileManager) WriteFile(file string, data []byte, permissions int) erro
 }
 
 // ExistsFile checks if a file exists
-func (fm *FileManager) ExistsFile(file string) (bool, error) {
-	_, err := ioutil.ReadFile(file)
+func (fm *FileManager) ExistsFile(file string) bool {
+	_, err := os.Stat(file)
 	if err != nil {
-		return false, errors.Wrap(err, "file doesn't exist")
+		return false
 	}
-	return true, nil
+	return true
 }
