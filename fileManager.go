@@ -34,8 +34,7 @@ func (fm *FileManager) WriteFile(file string, data []byte, permissions uint32) e
 		permissions = 0644
 	}
 
-	err := ioutil.WriteFile(file, data, os.FileMode(permissions))
-	if err != nil {
+	if err := ioutil.WriteFile(file, data, os.FileMode(permissions)); err != nil {
 		return errors.Wrap(err, "while writing file")
 	}
 	return nil
