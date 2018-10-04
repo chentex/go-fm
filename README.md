@@ -6,6 +6,7 @@ A simple file manager library.
 [![codecov](https://codecov.io/gh/chentex/go-fm/branch/master/graph/badge.svg)](https://codecov.io/gh/chentex/go-fm/branch/master)
 [![GoDoc](https://godoc.org/github.com/chentex/go-fm?status.svg)](https://godoc.org/github.com/chentex/go-fm)
 [![Go Report Card](https://goreportcard.com/badge/github.com/chentex/go-fm)](https://goreportcard.com/report/github.com/chentex/go-fm)
+[![BCH compliance](https://bettercodehub.com/edge/badge/chentex/go-fm?branch=master)](https://bettercodehub.com/)
 
 Package errors provides simple error handling primitives and behavioral errors.
 
